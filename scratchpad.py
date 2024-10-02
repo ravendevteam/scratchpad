@@ -326,6 +326,7 @@ class Scratchpad(QMainWindow):
         self.actions['save'] = saveAction
 
         saveAsAction = QAction('Save As...', self)
+        saveAsAction.setShortcut('Ctrl+Shift+S')
         saveAsAction.triggered.connect(self.saveFileAs)
         menu.addAction(saveAsAction)
         self.actions['saveas'] = saveAsAction
@@ -380,6 +381,7 @@ class Scratchpad(QMainWindow):
         self.actions['selectall'] = selectAllAction
 
         findReplaceAction = QAction('Find and Replace...', self)
+        findReplaceAction.setShortcut('Ctrl+F')
         findReplaceAction.triggered.connect(self.openFindReplaceDialog)
         menu.addAction(findReplaceAction)
         self.actions['findreplace'] = findReplaceAction
@@ -405,10 +407,10 @@ class Scratchpad(QMainWindow):
             'undo': 'undo.png'
         }
 
-        print("Current OS: " + os.name)
+        print("Current OS: " + sys.platform)
 
         # If the os is Windows, use icons. If it isn't, dont add icons.
-        if(os.name == 'nt'):
+        if(sys.platform != 'darwin'):
             for action_name, icon_filename in icon_files.items():
                 icon_path = os.path.join(icons_folder, icon_filename)
                 if os.path.isfile(icon_path):
