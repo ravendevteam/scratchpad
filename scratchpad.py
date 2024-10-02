@@ -351,7 +351,10 @@ class Scratchpad(QMainWindow):
         self.actions['undo'] = undoAction
 
         redoAction = QAction('Redo', self)
-        redoAction.setShortcuts(['Ctrl+Y', 'Ctrl+Shift+Z'])
+        if sys.platform != 'darwin':
+            redoAction.setShortcuts(['Ctrl+Y', 'Ctrl+Shift+Z'])
+        else:
+            redoAction.setShortcuts(['Ctrl+Shift+Z', 'Ctrl+Y'])
         redoAction.triggered.connect(self.textEdit.redo)
         menu.addAction(redoAction)
         self.actions['redo'] = redoAction
