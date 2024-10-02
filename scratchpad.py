@@ -386,6 +386,7 @@ class Scratchpad(QMainWindow):
 
     def setMenuIcons(self):
         """Set icons for menu actions if available in the icons folder."""
+        print(os.name)
         icons_folder = os.path.join(os.path.dirname(__file__), 'icons')
         if getattr(sys, 'frozen', False):
             icons_folder = os.path.join(sys._MEIPASS, 'icons')
@@ -477,7 +478,7 @@ class Scratchpad(QMainWindow):
 
         asterisk = ""
         if not after_save:
-            asterisk = "*" if self.unsaved_changes else ""
+            asterisk = "| Changes made" if self.unsaved_changes else ""
 
         self.statusBar.showMessage(f"Line: {self.line} | Column: {self.column} | Characters: {self.char_count} | Encoding: {self.encoding} {asterisk}")
 
