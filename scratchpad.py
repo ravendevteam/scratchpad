@@ -386,7 +386,6 @@ class Scratchpad(QMainWindow):
 
     def setMenuIcons(self):
         """Set icons for menu actions if available in the icons folder."""
-        print(os.name)
         icons_folder = os.path.join(os.path.dirname(__file__), 'icons')
         if getattr(sys, 'frozen', False):
             icons_folder = os.path.join(sys._MEIPASS, 'icons')
@@ -406,10 +405,14 @@ class Scratchpad(QMainWindow):
             'undo': 'undo.png'
         }
 
-        for action_name, icon_filename in icon_files.items():
-            icon_path = os.path.join(icons_folder, icon_filename)
-            if os.path.isfile(icon_path):
-                self.actions[action_name].setIcon(QIcon(icon_path))
+        print("Current OS: " + os.name)
+
+        # If the os is Windows, use icons. If it isn't, dont add icons.
+        if(os.name == 'nt'):
+            for action_name, icon_filename in icon_files.items():
+                icon_path = os.path.join(icons_folder, icon_filename)
+                if os.path.isfile(icon_path):
+                    self.actions[action_name].setIcon(QIcon(icon_path))
 
     def openFindReplaceDialog(self):
         """Open the find and replace dialog."""
